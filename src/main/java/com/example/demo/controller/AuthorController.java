@@ -22,11 +22,16 @@ public class AuthorController {
 
     @GetMapping("/{id}")
     public Author getAuthor(@PathVariable Long id){
-        return this.authorRepository.findById(id).get();
+        Author author = this.authorRepository.findById(id).get();
+        author.setPassword("****");
+        return author;
     }
 
     @GetMapping
     public List<Author> getAllAuthors(){
-        return this.authorRepository.findAll();
+        List<Author> authors = this.authorRepository.findAll();
+        authors.forEach(author -> author.setPassword("*****"));
+
+        return authors;
     }
 }
